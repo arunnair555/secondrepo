@@ -1,0 +1,16 @@
+i
+down vote
+Before you can commit and push, you need to init a working repository tree for a submodule. I am using tortoise and do following things:
+
+First check if there exist .git file (not a directory)
+
+if there is such file it contains path to supermodule git directory
+delete this file
+do git init
+do git add remote path the one used for submodule
+follow instructions below
+If there was .git file, there surly was .git directory which tracks local tree. You still need to a branch (you can create one) or switch to master (which sometimes does not work). Best to do is - git fetch - git pull. Do not omit fetch.
+
+Now your commits and pulls will be synchronized with your origin/master
+
+shareimprove this answer

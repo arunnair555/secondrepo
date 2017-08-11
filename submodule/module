@@ -1,0 +1,22 @@
+	
+Note that since git1.7.11 ([ANNOUNCE] Git 1.7.11.rc1 and release note, June 2012) mentions:
+
+"git push --recurse-submodules" learned to optionally look into the histories of submodules bound to the superproject and push them out.
+Probably done after this patch and the --on-demand option:
+
+recurse-submodules=<check|on-demand>::
+Make sure all submodule commits used by the revisions to be pushed are available on a remote tracking branch.
+
+If check is used, it will be checked that all submodule commits that changed in the revisions to be pushed are available on a remote.
+Otherwise the push will be aborted and exit with non-zero status.
+If on-demand is used, all submodules that changed in the revisions to be pushed will be pushed.
+If on-demand was not able to push all necessary revisions it will also be aborted and exit with non-zero status.
+So you could push everything in one go with (from the parent repo) a:
+
+git push --recurse-submodules=on-demand
+This option only works for one level of nesting. Changes to the submodule inside of another submodule will not be pushed.
+
+With git 2.7 (January 2016), a simple git push will be enough to push the parent repo... and all its submodules.
+
+See commit d34141c, commit f5c7cd9 (03 Dec 2015), commit f5c7cd9 (03 Dec 2015), and commit b33a15b (17 Nov 2015) by Mike Crowe (mikecrowe).
+(Merged by Junio C Hamano -- gitster -- in commit 5d35d72, 21 Dec 2015)
